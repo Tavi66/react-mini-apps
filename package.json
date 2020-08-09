@@ -1,5 +1,5 @@
 {
-  "name": "loan-calculator",
+  "name": "calculator",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,6 +11,7 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
+    "server": "json-server -p3001 db.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

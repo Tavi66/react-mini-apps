@@ -1,0 +1,36 @@
+.SideNav {
+    background-color: #727d8b;
+    /* min-width: 30%; */
+    /* z-index: 1; */
+    /* 
+    min-height: 60%; */
+    /* flex-direction: column; */
+}
+
+.Item {
+    list-style-type: none;
+    display: inline-flex;
+    padding: 8px;
+}
+
+.List{
+    margin: 0px;
+}
+.List li:hover{
+    text-decoration: none;
+    color: ghostwhite;
+    background-color: blue;
+} 
+
+.TopNav {
+    background-color: #559ed6;
+    display: block;
+    position: relative;
+    color: aliceblue;
+    /* padding: 10px 0px 0px 0px; */
+    text-align: center;
+}
+
+.Nav {
+    background-color: rgb(194, 194, 194);
+}
