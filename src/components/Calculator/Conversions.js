@@ -41,21 +41,21 @@ const convertVacuum = (initUnit, val) => {
     const kgsqcm = at * 1.033;
     
     return([
-        {unit: 'Pascal', value: p},
-        {unit: 'kPa', value: kpa},  
-        {unit: 'In H2O', value: inh2o},
-        {unit: 'In Hg', value: inhg},
-        {unit: 'Millibar', value: mb},        
-        {unit: 'mm Hg', value: mmhg},
-        {unit: 'Atmospheres', value: at},
-        {unit: 'KG/sq. cm.', value: kgsqcm},
-        {unit: 'Bar', value: b}
+        {unit: 'Pascal', value: Math.round(p*1000)/1000},
+        {unit: 'kPa', value: Math.round(kpa*1000)/1000},  
+        {unit: 'In H2O', value: Math.round(inh2o*1000)/1000},
+        {unit: 'In Hg', value: Math.round(inhg*1000)/1000},
+        {unit: 'Millibar', value: Math.round(mb*1000)/1000},        
+        {unit: 'mm Hg', value: Math.round(mmhg*1000)/1000},
+        {unit: 'Atmospheres', value: Math.round(at*1000)/1000},
+        {unit: 'KG/sq. cm.', value: Math.round(kgsqcm*1000)/1000},
+        {unit: 'Bar', value: Math.round(b*1000)/1000}
 ])
 }
 const convertVolume = (initUnit, val) => {
     let oz = val;
     switch(initUnit){
-        case 'Liters': ;
+        case 'Liters': oz /= 0.0296;
         break;
         case 'Fluid Ounces': oz = val;
         break;
@@ -85,15 +85,15 @@ const convertVolume = (initUnit, val) => {
     const l = oz * 0.0296;
 
     return([
-        {unit: 'Liters', value: l},
-        {unit: 'Fluid Ounces', value: oz},
-        {unit: 'Quarts', value: qt},  
-        {unit: 'Gallons', value: gal},
-        {unit: 'Cu. Inches', value: inc},
-        {unit: 'Cu. Centimeters', value: cmc},
-        {unit: 'Cu. Feet', value: ftc},
-        {unit: 'Cu. Yards', value: ydc},
-        {unit: 'Cu. Meters', value: mc}
+        {unit: 'Liters', value: Math.round(l*1000)/1000},
+        {unit: 'Fluid Ounces', value: Math.round(oz*1000)/1000},
+        {unit: 'Quarts', value: Math.round(qt*1000)/1000},  
+        {unit: 'Gallons', value: Math.round(gal*1000)/1000},
+        {unit: 'Cu. Inches', value: Math.round(inc*1000)/1000},
+        {unit: 'Cu. Centimeters', value: Math.round(cmc*1000)/1000},
+        {unit: 'Cu. Feet', value: Math.round(ftc*1000)/1000},
+        {unit: 'Cu. Yards', value: Math.round(ydc*1000)/1000},
+        {unit: 'Cu. Meters', value: Math.round(mc*1000)/1000}
     ])
 }
 const convertWeight = (initUnit, val) => {
@@ -121,12 +121,12 @@ const convertWeight = (initUnit, val) => {
     const mton = g * 1e-6;
 
     return([
-        {unit: 'Kilograms', value: kg},
-        {unit: 'Ounces', value: oz},
-        {unit: 'Pounds', value: lb},
-        {unit: 'English Tons', value: eton},
-        {unit: 'Metric Tons', value: mton},
-        {unit: 'Grams', value: g}
+        {unit: 'Kilograms', value: Math.round(kg*1000)/1000},
+        {unit: 'Ounces', value: Math.round(oz*1000)/1000},
+        {unit: 'Pounds', value: Math.round(lb*1000)/1000},
+        {unit: 'English Tons', value: Math.round(eton*1000)/1000  > 0.001 ? Math.round(eton*1000)/1000 : eton},
+        {unit: 'Metric Tons', value: Math.round(mton*1000)/1000  > 0.001 ? Math.round(mton*1000)/1000 : mton},
+        {unit: 'Grams', value: Math.round(g*1000)/1000}
     ])
 }
 
@@ -167,13 +167,13 @@ const convertPressure = (initUnit, val) => {
     const mb = at * 1013.253;
 
     return([
-        {unit: 'Bar', value: b},
-        {unit: 'Pascal', value: p},
-        {unit: 'kg/cm', value: kgcm},
-        {unit: 'kPa', value: kpa},  
-        {unit: 'Atmospheres', value: at},
-        {unit: 'psi', value: psi},
-        {unit: 'Millibar', value: mb}  
+        {unit: 'Bar', value: Math.round(b*1000)/1000},
+        {unit: 'Pascal', value: Math.round(p*1000)/1000},
+        {unit: 'kg/cm', value: Math.round(kgcm*1000)/1000},
+        {unit: 'kPa', value: Math.round(kpa*1000)/1000},  
+        {unit: 'Atmospheres', value: Math.round(at*1000)/1000},
+        {unit: 'psi', value: Math.round(psi*1000)/1000},
+        {unit: 'Millibar', value: Math.round(mb*1000)/1000}  
 
     ])
 }
@@ -231,11 +231,11 @@ const convertTorque = (initUnit, val) => {
     const kgm = kgcm * 0.01;
 
     return([
-        {unit: 'Newton Meters', value: nm},  
-        {unit: 'Foot lbs', value: ftlb},  
-        {unit: 'Inch lbs', value: inlb},
-        {unit: 'KG cm', value: kgcm},
-        {unit: 'KG M', value: kgm}      
+        {unit: 'Newton Meters', value: Math.round(nm*1000)/1000},  
+        {unit: 'Foot lbs', value: Math.round(ftlb*1000)/1000},  
+        {unit: 'Inch lbs', value: Math.round(inlb*1000)/1000},
+        {unit: 'KG cm', value: Math.round(kgcm*1000)/1000},
+        {unit: 'KG M', value: Math.round(kgm*1000)/1000}      
     ])
 }
 
@@ -256,9 +256,9 @@ const convertForce = (initUnit, val) => {
     const N = oz * 0.278;
     const lb = oz * 0.0625;
     return([
-        {unit: 'Newtons', value:N},
-        {unit: 'Pounds', value:lb},
-        {unit: 'Ounces', value:oz},
+        {unit: 'Newtons', value:Math.round(N*1000)/1000},
+        {unit: 'Pounds', value:Math.round(lb*1000)/1000},
+        {unit: 'Ounces', value:Math.round(oz*1000)/1000},
         ]             
      );
 }
@@ -302,14 +302,14 @@ const convertDistance = (initUnit, val) => {
     const mi = mm / (1.609347e+6);
 
          return([
-            {unit: 'Meters', value: m},
-            {unit: 'Millimeters', value:mm},
-            {unit: 'Centimeters', value:cm},
-            {unit: 'Yards', value:yd},
-            {unit: 'Feet', value:ft},
-            {unit: 'Inches', value:inch},
-            {unit: 'Kilometers', value:km},
-            {unit: 'Miles', value:mi}
+            {unit: 'Meters', value: Math.round(m*1000)/1000},
+            {unit: 'Millimeters', value:Math.round(mm*1000)/1000},
+            {unit: 'Centimeters', value:Math.round(cm*1000)/1000},
+            {unit: 'Yards', value:Math.round(yd*1000)/1000},
+            {unit: 'Feet', value:Math.round(ft*1000)/1000},
+            {unit: 'Inches', value:Math.round(inch*1000)/1000},
+            {unit: 'Kilometers', value:Math.round(km*10000)/10000 > 0.001 ? Math.round(km*1000)/1000 : km},
+            {unit: 'Miles', value:Math.round(mi*1000)/1000 > 0.001 ? Math.round(mi*1000)/1000 : mi}
             ]             
          );
 }
@@ -359,14 +359,14 @@ const convertArea = (initUnit, val) => {
          const yd = mm * _yd;
          const mi = mm / _mi;
          return([
-            {unit: 'Sq. Meters', value: m},
-            {unit: 'Sq. Millimeters', value:mm},
-            {unit: 'Sq. Centimeters', value:cm},
-            {unit: 'Sq. Yards', value:yd},
-            {unit: 'Sq. Feet', value:ft},
-            {unit: 'Sq. Inches', value:inch},
-            {unit: 'Sq. Kilometers', value:km},
-            {unit: 'Sq. Miles', value:mi} 
+            {unit: 'Sq. Meters', value: Math.round(m*1000)/1000},
+            {unit: 'Sq. Millimeters', value:Math.round(mm*1000)/1000},
+            {unit: 'Sq. Centimeters', value:Math.round(cm*1000)/1000},
+            {unit: 'Sq. Yards', value:Math.round(yd*1000)/1000},
+            {unit: 'Sq. Feet', value:Math.round(ft*1000)/1000},
+            {unit: 'Sq. Inches', value:Math.round(inch*1000)/1000},
+            {unit: 'Sq. Kilometers', value:Math.round(km*1000)/1000  > 0.001 ? Math.round(km*1000)/1000 : km},
+            {unit: 'Sq. Miles', value:Math.round(mi*1000)/1000  > 0.001 ? Math.round(mi*1000)/1000 : mi} 
             ]             
          );
 }
