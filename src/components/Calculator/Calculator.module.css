@@ -16,7 +16,7 @@
     padding-right: auto;
     position: relative;
     display: block;
-    background-color: white;
+    /* background-color: white; */
 }
 .UnitValue {
     border: 1px solid #eee;

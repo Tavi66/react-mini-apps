@@ -1,10 +1,5 @@
 .SideNav {
     background-color: #727d8b;
-    /* min-width: 30%; */
-    /* z-index: 1; */
-    /* 
-    min-height: 60%; */
-    /* flex-direction: column; */
 }
 
 .Item {
@@ -31,6 +26,35 @@
     text-align: center;
 }
 
+.DropDown {
+    background-color: #559ed6;
+    display: inline-block;
+    position: relative;
+    color: aliceblue;
+    /* padding: 10px 0px 0px 0px; */
+    text-align: center;
+    list-style-type: none;
+    /* display: inline-flex; */
+}
+.DropDownContent {
+    display: none;
+    text-decoration: none;
+    /* list-style-type: none; */
+}
+.DropDown:hover .DropDownContent {
+    text-decoration: none;
+    background-color: #488fc5;
+    display: block;
+    position: absolute;
+    color: aliceblue;
+    /* padding: 10px 0px 0px 0px; */
+    min-width: 70%;
+    flex-direction: column;
+    list-style-type: none;
+    z-index: 1;
+    text-align:left;
+    padding-right: 8px;
+}
 .Nav {
     background-color: rgb(194, 194, 194);
 }

@@ -1,72 +1,40 @@
 import React, {Component} from 'react';
 
 import classes from './Calculator.module.css';
-import navClasses from '../Navigation/Navigation.module.css';
+import Units from './Units';
 
 import Convert from './Conversions';
 
-const Navbar = (props) => {
-    let style = {
-        backgroundColor: 'gray',
-        padding: '0px',
-        position: 'relative',
-        width: '100%'
-    }
-    return(
-    <div className={navClasses.TopNav} style={style}>
-        <ul className={navClasses.List}>
-          <li className={navClasses.Item} onClick={(event)=>props.click(event,'area')}>
-            Area
-          </li>           
-          <li className={navClasses.Item} onClick={(event)=>props.click(event,'length')}>
-            Distance/Length
-          </li>          
-          <li className={navClasses.Item} onClick={(event)=>props.click(event,'force')}>
-            Force
-          </li>
-          <li className={navClasses.Item} onClick={(event)=>props.click(event,'pressure')}>
-            Pressure
-          </li>
-          <li className={navClasses.Item} onClick={(event)=>props.click(event,'temperature')}>
-            Temperature
-          </li>
-          <li className={navClasses.Item} onClick={(event)=>props.click(event,'torque')}>
-            Torque
-          </li>
-          <li className={navClasses.Item} onClick={(event)=>props.click(event,'vacuum')}>
-            Vacuum
-          </li>
-          <li className={navClasses.Item} onClick={(event)=>props.click(event,'volume')}>
-            Volume
-          </li>
-          <li className={navClasses.Item} onClick={(event)=>props.click(event,'weight')}>
-            Weight
-          </li>
-         </ul>
-    </div> 
-    )
-
-}
-
 const DisplayConversion = (props) => {
-    //console.log('props.info',props.info)
-    const items = props.info.map(element => {
+    let list = props.info;
+    let options = list.map((element,index) => {
+        return <option 
+        key={element.unit + index}
+        value={element.unit}>{element.unit}</option>;
+    });
+    //units in a table
+    const items = list.map((element, index) => {
         let classI = classes.Item;
-
+        let selectList =         
+      <select value={props.selectedUnit.unit} 
+      onChange={(event) => props.selectionHandler(event)}>
+    {options}
+    </select>
         return(
-        <tr key={element.unit} onClick={(event) => props.clicked(event,element.unit)}>
+        <tr key={element.unit}>
             <td className={classI}>
                 <input className={classes.UnitValue}
                 type='number' 
-                // placeholder={element.value} 
-                value={element.value} 
+                value={element.value > 0 ? element.value : ''} 
                 onChange={(event) => props.onValueChangeHandler(event, element.unit)}/>
                 </td>
-            <td className={classI}
-            >{element.unit}</td>
+            <td className={classI}>
+                {index === 0  ? selectList : element.unit}
+                </td>
         </tr>
         )
     })
+
     return (
     <table className={classes.Conversion}>
         <tbody>
@@ -79,49 +47,101 @@ const DisplayConversion = (props) => {
 const convertAll = (value, unit, list, type) => {
     //console.log('convertAll list', list, 'value', value, 'unit', unit)
     let newList = list;
-            switch(type){
-                case 'area': newList = Convert.convertArea(unit, value);
-                    break;
-                case 'length': newList = Convert.convertDistance(unit,value);
-                    break; 
-                case 'force': newList = Convert.convertForce(unit,value);
-                    break;
-                case 'pressure': newList = Convert.convertPressure(unit,value);
-                    break;
-                case 'temperature':newList = Convert.convertTemperature(unit,value);
-                    break;
-                case 'torque': newList = Convert.convertTorque(unit,value);
-                    break;
-                case 'vacuum':newList = Convert.convertVacuum(unit,value);
-                    break;
-                case 'volume':newList = Convert.convertVolume(unit,value);
-                    break;
-                case 'weight':newList = Convert.convertWeight(unit,value);
+        switch(type){
+            case 'area': newList = Convert.convertArea(unit, value);
                 break;
-                default: ;   
-            }
-
-        return newList;
-    }
-
-const setConversionList = (listAll) => {
-    //console.log('listAll',listAll);
-    let list = listAll == null ? null : listAll.map(element => {
-    return(
-    <option key={element.unit} value={element.unit}>{element.unit}</option>
-    );
-    })
-    return list;
+            case 'length': newList = Convert.convertDistance(unit,value);
+                break; 
+            case 'force': newList = Convert.convertForce(unit,value);
+                break;
+            case 'pressure': newList = Convert.convertPressure(unit,value);
+                break;
+            case 'temperature':newList = Convert.convertTemperature(unit,value);
+                break;
+            case 'torque': newList = Convert.convertTorque(unit,value);
+                break;
+            case 'vacuum':newList = Convert.convertVacuum(unit,value);
+                break;
+            case 'volume':newList = Convert.convertVolume(unit,value);
+                break;
+            case 'weight':newList = Convert.convertWeight(unit,value);
+                break;
+            default: ;   
+        }
+    return newList;
 }
 
 class ConversionCalculator extends Component {
     state = {
     //    update: true,
+    converted: [],
+    selected: {unit:'', value:0,index:0},
+    swapIndex: 0,
     converting:[],
-    convertTo:''
+//    selectionList: [],
+    convertTo:'',
+    area: Units.area(),    
+    length: Units.length(),
+    force:Units.force(),
+    pressure:Units.pressure(),
+    temperature:Units.temperature(),
+    torque:Units.torque(),
+    vacuum:Units.vacuum(),
+    volume:Units.volume(),
+    weight:Units.weight()
     }
 
+    getList = () => {
+        let list = null;
+        switch(this.props.type)
+    {
+        case 'area': 
+          list = this.state.area;
+        break;
+        case 'length': 
+          list = this.state.length;
+        break; 
+        case 'force': 
+          list = this.state.force;
+        break;
+        case 'pressure':
+          list = this.state.pressure;
+        break;
+        case 'temperature':
+          list = this.state.temperature;
+        break;
+        case 'torque':
+          list = this.state.torque;
+        break;
+        case 'vacuum':
+          list = this.state.vacuum;
+        break;
+        case 'volume':
+          list = this.state.volume;
+        break;
+        case 'weight':
+          list = this.state.weight;
+        break;
+        default: list = [];        
+        };
+        console.log('list', list)
+        return list;
+    }
 
+    swapObj = () => {
+        const orig = this.state.converting[0];
+        const selected = this.state.selected;
+
+        let arr = [...this.state.converting];
+        arr[0] = selected;
+        arr[this.state.swapIndex] = orig;
+        this.setState({converting: arr});
+        this.setState({converted: arr});
+    }
+
+    setSwapIndex = (index) => {
+        this.setState({swapIndex: index});
+    }
     onValueChangeHandler = (event, unit) => {
         //this.setState({converting: this.props.list});
         const val = event.target.value;
@@ -140,49 +160,83 @@ class ConversionCalculator extends Component {
         list[index] = item;
 
         let newList = convertAll(val,unit,list,this.props.type);
+        
+        let temp = newList[0];
+        let swapIndex = this.state.swapIndex;
+        newList[0] = newList[swapIndex];
+        newList[swapIndex] = temp;
+
+        console.log('newList[swapIndex]',newList[swapIndex]);
         console.log('newList',newList);
 
+        this.setState({converted: newList});
         this.setState({converting: newList});
-        //this.converting = list;
-        //console.log('this.state.converting', this.state.converting);
+        console.log('this.state.converting', this.state.converting);
+    }
+
+    selectionHandler = (event) => {
+
+        let unit = event.target.value;
+        let index = this.state.converting.findIndex(element => unit === element.unit);
+        let value = this.state.converted[index].value;
+
+        let selected = {unit: event.target.value, value: value, index: index};
+        console.log('selected (handler): ', unit, 'index (handler): ', index);
+        this.setState({selected: selected});
+        this.setSwapIndex(index);
+
+        const orig = this.state.converting[0];
+
+        let arr = [...this.state.converting];
+        arr[0] = selected;
+        arr[index] = orig;
+        this.setState({converting: arr});
+        console.log('arr arr: ', arr);
+        console.log('converting arr: ', this.state.converting);
+
     }
 
     selectHandler = (event) => {
         this.setState({convertTo: event.target.value});
-        //console.log('selected: ',event.target.value);
     };   
 
     unitClickHandler = (event, unit) => {
         this.setState({convertTo: unit});
-        //console.log('selected: ',unit);
+        console.log('clicked unit: ',unit);
 
     }
     
+    componentDidMount = () => {
+        this.setState({converting: this.getList()});
+    }
     componentDidUpdate = () => {
         let updateFromProps = this.props.update;
         if(updateFromProps)
         {
-            this.setState({converting: this.props.list});
+            this.setState({converting: this.getList()});
             this.props.updating();
         }        
+         console.log('selected: ', this.state.selected);
+         console.log('swapIndex: ', this.state.swapIndex);
+         console.log('this.state.converting arr: ', this.state.converting);
     }
 
     render()
     {
-
-        let conversionList =  setConversionList(this.state.converting);
-        return(<div>
-            <Navbar click={this.props.click}/>
-            {/* <button onClick={(event)=>this.props.click(event,'force')}>Force</button>
-            <button onClick={(event)=>this.props.click(event,'length')}>Distance/Length</button> */}
-            <DisplayConversion
+        return(
+        <div>
+        <DisplayConversion
+            swap={this.swapObj}
+            swapIndex = {this.state.swapIndex}
+            selectionHandler = {this.selectionHandler}
+            selectedUnit = {this.state.selected}
             convertTo ={this.state.convertTo}
             info={this.state.converting} 
             onValueChangeHandler={this.onValueChangeHandler} 
-            conversionList={conversionList}
-            clicked={this.unitClickHandler}
+            unitClickHandler={this.unitClickHandler}
             select={this.selectHandler}/>
-    </div>);
+        </div>
+    );
     };
 }
 
