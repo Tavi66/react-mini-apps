@@ -48,7 +48,7 @@ class LoanCalculator extends Component {
     render(){
     return(
         <div>
-        <h3>Car Loan Calculator</h3>
+        <h3>Loan Calculator</h3>
         <DisplayCalculator
           amountChanged={this.loanAmountOnChange}
           interestChanged={this.interestOnChange}

@@ -1,21 +1,65 @@
 .SideNav {
     background-color: #727d8b;
+    color: aliceblue;
+    position: absolute;
+    display: block;
+    z-index: 1;
+    flex-direction: column;
+    width: 150px;
+    text-align: left;
+    padding-right: 16px;
+    min-height: 100%;
+    /* padding-left: 24px; */
 }
 
-.Item {
+.SideItem{
+    display: inline;
+}
+
+.TopItem {
     list-style-type: none;
     display: inline-flex;
     padding: 8px;
 }
+.TopList{
+    margin: 0px;
+}
 
+.TopList li:hover{
+    text-decoration: none;
+    color: ghostwhite;
+    background-color: blue;
+} 
+
+.Item {
+    background-color: #727d8b;
+    list-style-type: none;
+    display: inline-flex;
+    padding: 8px;
+}
+.ActiveTab{
+    padding-left: 10px;
+    list-style-type: none;
+    display: inline-flex;
+    background-color: darkgray;
+    min-width: 100%;
+}
 .List{
     margin: 0px;
+    padding: 0px;
+}
+
+.List li{
+    margin: 0px;
+    padding: 8px;
+    width: 150px;
 }
 .List li:hover{
     text-decoration: none;
     color: ghostwhite;
     background-color: blue;
 } 
+
 
 .TopNav {
     background-color: #559ed6;
