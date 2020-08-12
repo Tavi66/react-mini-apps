@@ -5,6 +5,8 @@ import Units from './Units';
 
 import Convert from './Conversions';
 
+//Conversions not swapping correctly
+//Inputs and labels become incorrect sometimes after swapping objects at indexes
 const DisplayConversion = (props) => {
     let list = props.info;
     let options = list.map((element,index) => {
@@ -124,7 +126,7 @@ class ConversionCalculator extends Component {
         break;
         default: list = [];        
         };
-        console.log('list', list)
+        //console.log('list', list)
         return list;
     }
 
@@ -166,22 +168,21 @@ class ConversionCalculator extends Component {
         newList[0] = newList[swapIndex];
         newList[swapIndex] = temp;
 
-        console.log('newList[swapIndex]',newList[swapIndex]);
-        console.log('newList',newList);
+        //console.log('newList[swapIndex]',newList[swapIndex]);
+        //console.log('newList',newList);
 
         this.setState({converted: newList});
         this.setState({converting: newList});
-        console.log('this.state.converting', this.state.converting);
+        //console.log('this.state.converting', this.state.converting);
     }
 
     selectionHandler = (event) => {
-
         let unit = event.target.value;
         let index = this.state.converting.findIndex(element => unit === element.unit);
-        let value = this.state.converted[index].value;
+        let value = index > 0 ? this.state.converted[index].value : 0;
 
         let selected = {unit: event.target.value, value: value, index: index};
-        console.log('selected (handler): ', unit, 'index (handler): ', index);
+        //console.log('selected (handler): ', unit, 'index (handler): ', index);
         this.setState({selected: selected});
         this.setSwapIndex(index);
 
@@ -191,8 +192,8 @@ class ConversionCalculator extends Component {
         arr[0] = selected;
         arr[index] = orig;
         this.setState({converting: arr});
-        console.log('arr arr: ', arr);
-        console.log('converting arr: ', this.state.converting);
+        //console.log('arr arr: ', arr);
+        //console.log('converting arr: ', this.state.converting);
 
     }
 
@@ -208,6 +209,7 @@ class ConversionCalculator extends Component {
     
     componentDidMount = () => {
         this.setState({converting: this.getList()});
+        this.setState({converted: this.getList()});
     }
     componentDidUpdate = () => {
         let updateFromProps = this.props.update;
@@ -216,9 +218,9 @@ class ConversionCalculator extends Component {
             this.setState({converting: this.getList()});
             this.props.updating();
         }        
-         console.log('selected: ', this.state.selected);
-         console.log('swapIndex: ', this.state.swapIndex);
-         console.log('this.state.converting arr: ', this.state.converting);
+        //  console.log('selected: ', this.state.selected);
+        //  console.log('swapIndex: ', this.state.swapIndex);
+        //  console.log('this.state.converting arr: ', this.state.converting);
     }
 
     render()

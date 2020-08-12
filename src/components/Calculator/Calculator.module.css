@@ -12,10 +12,10 @@
 }
 .Conversion{
     /* padding-top: 5%; */
-    padding-left: auto;
-    padding-right: auto;
+    /* padding-left: auto;
+    padding-right: auto; */
     position: relative;
-    display: block;
+    display: inline;
     /* background-color: white; */
 }
 .UnitValue {
@@ -29,4 +29,18 @@
     box-shadow: 0 2px 3px #ccc;
     padding: 16px;
     margin: 16px;
+}
+
+.Table {
+    border-collapse: collapse;
+    margin: 8px;
+    width: 95%;
+}
+
+.Table td,th{
+    border: 1px solid black;
+    padding: 8px;    
+}
+.Table input{
+    width: 95%;   
 }
