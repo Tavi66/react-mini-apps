@@ -22,7 +22,6 @@ app.get('/', (request, response) => {
 
 app.get('/', (request, response) => {
     response.send('on server');
-    //db.close();
 });
 
 //Payroll requests
@@ -40,13 +39,8 @@ app.post('/api/payroll/add', (request, response) => {
   app.get('/close', (request, response) => {
       mongo.closeDb();
   })
+  
   app.listen( port, () => {
     console.log(`Server running on port ${port}!`);
-<<<<<<< HEAD
-    mongo.checkVar();
-    //mongo.connect();
-});
-=======
     mongo.connect();
 });
->>>>>>> master
