@@ -42,6 +42,5 @@ app.post('/api/payroll/add', (request, response) => {
   })
   app.listen( port, () => {
     console.log(`Server running on port ${port}!`);
-    mongo.checkVar();
-    //mongo.connect();
+    mongo.connect();
 });
