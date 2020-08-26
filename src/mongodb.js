@@ -1,5 +1,9 @@
 const MongoClient = require('mongodb').MongoClient;
-require('dotenv').config();
+
+if(process.env.NODE_ENV !== "production")
+{
+  require('dotenv').config();
+}
 
 const uri = process.env.REACT_APP_MONGOURI;
 var db;
