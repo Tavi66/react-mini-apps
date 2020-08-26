@@ -12,13 +12,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //mongo.connect();
-var db;
-// var db = mongo.getDb();
 
-app.use(express.static(path.join(__dirname,"..","client/build")) );
+app.use(express.static(path.join(__dirname,"..","build")) );
 
 app.get('/', (request, response) => {
-    response.sendFile(path.join(__dirname, 'client/build',  'index.html'));
+    response.sendFile(path.join(__dirname, 'build',  'index.html'));
 });
 
 
@@ -27,29 +25,16 @@ app.get('/', (request, response) => {
     //db.close();
 });
 
+//Payroll requests
 app.get('/api/payroll',(request,response) => {
-    const dbo = db.db("data");
-    dbo.collection("payroll").find({})
-    .toArray(function(err, result) {
-        console.log('Retrieving Documents...');
-
-        if(err) throw err;
-        
-        console.log('Retrieved Documents!');
-        response.send(result);
-    })
+    request.connection.setTimeout(1000 * 60 * 10);
+    mongo.getPayrollDocuments(response);
   });
 
-  app.post('/api/payroll/add', (request, response) => {
-      const record = request.body;
-      
-      const dbo = db.db("data");
-      dbo.collection("payroll").insertOne(record)
-         .then( res => {
-              console.log('Added document!');
-            //   console.log(res);
-              console.log(record);
-          })
+app.post('/api/payroll/add', (request, response) => {
+    request.connection.setTimeout(1000 * 60 * 10);
+    const record = request.body;
+    mongo.postSinglePayroll(record);
   });
 
   app.get('/close', (request, response) => {
@@ -57,6 +42,6 @@ app.get('/api/payroll',(request,response) => {
   })
   app.listen( port, () => {
     console.log(`Server running on port ${port}!`);
-   // mongo.connect();
-   // db = mongo.getDb();
+    mongo.checkVar();
+    //mongo.connect();
 });

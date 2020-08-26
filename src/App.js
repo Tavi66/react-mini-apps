@@ -65,6 +65,7 @@ class App extends Component{
       this.showSideNav();   
     } else this.hideSideNav();
   }
+
   render()
   { 
     let mainComponent = null;
