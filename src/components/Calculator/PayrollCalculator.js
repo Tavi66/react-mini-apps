@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import classes from './Calculator.module.css';
 
-const port = process.env.PORT  || 5000;
+//const port = process.env.PORT  || 5000;
 
 const DisplayPayroll = (props) => {
     const info = props.payroll;
@@ -107,8 +107,9 @@ const DisplayPayroll = (props) => {
 
 class PayrollCalculator extends Component {
     state = {
-        baseUrl: `http://localhost:${port}/api/`,
-        headers: {
+        baseUrl: `/api/`,
+        //baseUrl: `http://localhost:${port}/api/`,
+       headers: {
             "Content-Type": "application/json"
           },
         commissionRate: 0.055,

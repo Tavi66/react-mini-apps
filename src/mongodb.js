@@ -6,6 +6,7 @@ if(process.env.NODE_ENV !== "production")
 }
 
 const uri = process.env.REACT_APP_MONGOURI;
+
 var db;
 
 //Initialize mongodb connection once
