@@ -148,7 +148,7 @@ class PayrollCalculator extends Component {
             Labor: L,
         }
 
-        this.setState({newRecord: newRecord});
+        //this.setState({newRecord: newRecord});
 
         const url = this.state.baseUrl.concat('payroll/add'); 
         //add new record into database

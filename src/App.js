@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import './App.css';
 
-import LoanCalculator from './components/Calculator/LoanCalculator';
-import ConversionCalculator from './components/Calculator/ConversionCalculator';
+import LoanCalculator from './containers/Calculator/LoanCalculator';
+import ConversionCalculator from './containers/Calculator/ConversionCalculator';
 import Navigation, {SideNav} from './components/Navigation/Navigation';
-import Units from './components/Calculator/Units';
-import Scraper from './components/Scraper/Scraper';
-import ToDoList from './components/ToDoList/ToDoList';
-import PayrollCalculator from './components/Calculator/PayrollCalculator';
+import Units from './containers/Calculator/Units';
+import Scraper from './containers/Scraper/Scraper';
+import ToDoList from './containers/ToDoList/ToDoList';
+import PayrollCalculator from './containers/Calculator/PayrollCalculator';
+import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 
 class App extends Component{
 
@@ -99,6 +100,9 @@ class App extends Component{
       break;
       case 'todo':
         mainComponent = <ToDoList />;
+        break;
+      case 'burgerBuilder':
+      mainComponent = <BurgerBuilder />;
       break;      
       default: ;
     }

@@ -82,6 +82,9 @@ const NavigationMenu = (props) => {
             <li className={classes.TopItem} onClick={(event) => props.clicked(event,'todo')}>
                 To-Do List
             </li>
+            <li className={classes.TopItem} onClick={(event) => props.clicked(event,'burgerBuilder')}>
+                Burger Builder
+            </li>        
         </ul>
 
     return(

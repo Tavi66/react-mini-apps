@@ -76,6 +76,7 @@ const postSinglePayroll = (document) => {
       });
 }
 
+
 exports.connect = connect;
 exports.getDb = getDb;
 exports.closeDb = closeDb;
