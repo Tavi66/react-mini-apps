@@ -1,3 +1,28 @@
+.Nav {
+    width: 100%;
+    position: sticky;
+    justify-content: space-between;
+    background-color: rgb(194, 194, 194);
+    z-index: 90;
+}
+.Toolbar {
+    width: 100%;
+    top:0;
+    left:0;
+    height: 56px;
+    position: sticky;
+    background-color: #703B09;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    z-index: 90;
+}
+
+.Toolbar nav {
+    height: 100%;
+}
 .SideNav {
     background-color: #727d8b;
     color: aliceblue;
@@ -98,7 +123,4 @@
     z-index: 1;
     text-align:left;
     padding-right: 8px;
-}
-.Nav {
-    background-color: rgb(194, 194, 194);
 }

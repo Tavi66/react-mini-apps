@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import './App.css';
 
+import Navigation, {SideNav} from './components/Navigation/NavigationBar/Navigation';
+import Layout from './components/Layout/Layout';
+
 import LoanCalculator from './containers/Calculator/LoanCalculator';
 import ConversionCalculator from './containers/Calculator/ConversionCalculator';
-import Navigation, {SideNav} from './components/Navigation/Navigation';
 import Units from './containers/Calculator/Units';
 import Scraper from './containers/Scraper/Scraper';
 import ToDoList from './containers/ToDoList/ToDoList';
@@ -102,7 +104,9 @@ class App extends Component{
         mainComponent = <ToDoList />;
         break;
       case 'burgerBuilder':
-      mainComponent = <BurgerBuilder />;
+      mainComponent = <Layout> 
+          <BurgerBuilder />
+        </Layout>;
       break;      
       default: ;
     }

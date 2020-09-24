@@ -89,9 +89,9 @@ const NavigationMenu = (props) => {
 
     return(
     <div className={classes.Nav}>
-        <div className={classes.TopNav}>
+        <nav className={classes.TopNav}>
         {navbar}
-        </div>
+        </nav>
     </div>
     );
 }

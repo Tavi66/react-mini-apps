@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
     salad: 0.3,
@@ -26,8 +28,21 @@ class BurgerBuilder extends Component {
         },
         totalPrice: 4,
         purchasable: false,
+        purchaseMode: false,
     }
 
+    //Displays order summary modal if checkout button is clicked. Toggles purchaseMode. 
+    purchaseHandler = () => {
+        this.setState({purchaseMode: true});
+    }
+    //Continue purchase state
+    purchaseContinueHandler = () => {
+        alert('You continued!');
+    }    
+    //Cancel purchase state
+    purchaseCancelHandler = () => {
+        this.setState({purchaseMode: false});
+    }
     //Update purchase state to disable/ or enable checkout button
     updatePurchaseState (ingredients) {
         // const ingredients = {
@@ -97,6 +112,18 @@ class BurgerBuilder extends Component {
 
         return(
         <Aux>
+            <p></p>
+            <Modal 
+            show={this.state.purchaseMode}
+            modalClosed={this.purchaseCancelHandler}
+            >
+                <OrderSummary 
+                ingredients={this.state.ingredients}
+                purchaseCancel={this.purchaseCancelHandler}
+                purchaseContinue={this.purchaseContinueHandler}
+                price={this.state.totalPrice}
+                />
+            </Modal>
             {/* Display burger ingredients */}
             <Burger ingredients={this.state.ingredients} />
             {/* Display burger build and checkout controls */}
@@ -106,6 +133,7 @@ class BurgerBuilder extends Component {
             disabled={disabledInfo}
             price={this.state.totalPrice}
             purchasable={this.state.purchasable}
+            ordered={this.purchaseHandler}
             />
         </Aux>
         )
